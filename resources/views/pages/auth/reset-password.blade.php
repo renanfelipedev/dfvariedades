@@ -23,8 +23,9 @@
 
             <!-- Email Address -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">E-mail *</label>
+                <label for="email" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">E-mail *</label>
                 <input 
+                    id="email"
                     name="email" 
                     type="email" 
                     value="{{ request('email') }}" 
@@ -37,8 +38,9 @@
 
             <!-- Password -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">Nova Senha *</label>
+                <label for="password" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">Nova Senha *</label>
                 <input 
+                    id="password"
                     name="password" 
                     type="password" 
                     required 
@@ -51,8 +53,9 @@
 
             <!-- Confirm Password -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">Confirmar Nova Senha *</label>
+                <label for="password_confirmation" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">Confirmar Nova Senha *</label>
                 <input 
+                    id="password_confirmation"
                     name="password_confirmation" 
                     type="password" 
                     required 

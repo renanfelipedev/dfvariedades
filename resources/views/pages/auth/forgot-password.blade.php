@@ -21,8 +21,9 @@
 
             <!-- Email Address -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">E-mail Cadastrado *</label>
+                <label for="email" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">E-mail Cadastrado *</label>
                 <input 
+                    id="email"
                     name="email" 
                     type="email" 
                     value="{{ old('email') }}" 

@@ -31,8 +31,9 @@
 
             <!-- Email Address -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">E-mail *</label>
+                <label for="email" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">E-mail *</label>
                 <input 
+                    id="email"
                     name="email" 
                     type="email" 
                     value="{{ old('email') }}" 
@@ -48,7 +49,7 @@
             <!-- Password -->
             <div>
                 <div class="flex items-center justify-between mb-1">
-                    <label class="block text-xs font-semibold text-zinc-700">Senha *</label>
+                    <label for="password" class="block text-xs font-semibold text-zinc-700 cursor-pointer">Senha *</label>
                     @if (Route::has('password.request'))
                         <a href="{{ route('password.request') }}" class="text-[11px] text-[#B8892E] hover:text-[#8A6B2C] font-semibold hover:underline" wire:navigate>
                             Esqueceu a senha?
@@ -56,6 +57,7 @@
                     @endif
                 </div>
                 <input 
+                    id="password"
                     name="password" 
                     type="password" 
                     required 
@@ -67,8 +69,8 @@
             </div>
 
             <!-- Remember Me -->
-            <label class="flex items-center gap-2 text-xs text-zinc-700 cursor-pointer pt-1">
-                <input type="checkbox" name="remember" class="text-[#B8892E] rounded border-zinc-300 accent-[#B8892E]">
+            <label for="remember" class="flex items-center gap-2 text-xs text-zinc-700 cursor-pointer pt-1">
+                <input id="remember" type="checkbox" name="remember" class="text-[#B8892E] rounded border-zinc-300 accent-[#B8892E]">
                 <span>Lembrar-me neste dispositivo</span>
             </label>
 

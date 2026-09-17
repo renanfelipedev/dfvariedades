@@ -99,20 +99,20 @@
 
                 <form wire:submit="save" class="space-y-4 text-xs">
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Nome da Marca *</label>
-                        <input type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: O Boticário" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="marca-nome" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Nome da Marca *</label>
+                        <input id="marca-nome" type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: O Boticário" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('nome') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Slug da URL *</label>
-                        <input type="text" wire:model="slug" placeholder="o-boticario" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="marca-slug" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Slug da URL *</label>
+                        <input id="marca-slug" type="text" wire:model="slug" placeholder="o-boticario" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('slug') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Logo Upload & Preview -->
                     <div class="space-y-2">
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300">Logo / Foto da Marca</label>
+                        <label for="marca-logo-url" class="block font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">Logo / Foto da Marca</label>
                         
                         <div class="flex items-center gap-3">
                             <div class="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
@@ -133,6 +133,7 @@
                                     class="w-full text-[11px] text-zinc-500 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#C9A84C] file:text-black hover:file:opacity-90"
                                 >
                                 <input 
+                                    id="marca-logo-url"
                                     type="text" 
                                     wire:model="logo_url" 
                                     placeholder="Ou insira a URL da imagem..." 
@@ -144,28 +145,28 @@
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Descrição</label>
-                        <textarea wire:model="descricao" rows="2" placeholder="Breve resumo da marca..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
+                        <label for="marca-descricao" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Descrição</label>
+                        <textarea id="marca-descricao" wire:model="descricao" rows="2" placeholder="Breve resumo da marca..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Ordem</label>
-                            <input type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                            <label for="marca-ordem" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Ordem</label>
+                            <input id="marca-ordem" type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                         </div>
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Cor Temática</label>
-                            <input type="text" wire:model="cor" placeholder="#C9A84C" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                            <label for="marca-cor" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Cor Temática</label>
+                            <input id="marca-cor" type="text" wire:model="cor" placeholder="#C9A84C" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                         </div>
                     </div>
 
                     <div class="flex items-center gap-4 pt-2">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" wire:model="destaque" class="text-[#C9A84C] rounded">
+                        <label for="marca-destaque" class="flex items-center gap-2 cursor-pointer">
+                            <input id="marca-destaque" type="checkbox" wire:model="destaque" class="text-[#C9A84C] rounded">
                             <span class="font-semibold text-zinc-800 dark:text-zinc-200">Exibir nos Stories</span>
                         </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
+                        <label for="marca-ativo" class="flex items-center gap-2 cursor-pointer">
+                            <input id="marca-ativo" type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
                             <span class="font-semibold text-emerald-600">Ativa</span>
                         </label>
                     </div>

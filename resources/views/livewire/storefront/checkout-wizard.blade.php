@@ -91,35 +91,35 @@
                             <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--gold)]">1. Seus Dados de Contato</h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div>
-                                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Nome Completo *</label>
-                                    <input type="text" wire:model="nome" placeholder="Ex: Maria Silva" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                    <label for="checkout-nome" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Nome Completo *</label>
+                                    <input id="checkout-nome" type="text" wire:model="nome" placeholder="Ex: Maria Silva" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                     @error('nome') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">WhatsApp *</label>
-                                    <input type="tel" wire:model="whatsapp" placeholder="(74) 99999-9999" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                    <label for="checkout-whatsapp" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">WhatsApp *</label>
+                                    <input id="checkout-whatsapp" type="tel" wire:model="whatsapp" placeholder="(74) 99999-9999" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                     @error('whatsapp') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">CPF *</label>
-                                    <input type="text" wire:model="cpf" placeholder="000.000.000-00" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                    <label for="checkout-cpf" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">CPF *</label>
+                                    <input id="checkout-cpf" type="text" wire:model="cpf" placeholder="000.000.000-00" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                     @error('cpf') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">E-mail *</label>
-                                    <input type="email" wire:model="email" placeholder="seu@email.com" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                    <label for="checkout-email" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">E-mail *</label>
+                                    <input id="checkout-email" type="email" wire:model="email" placeholder="seu@email.com" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                     @error('email') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
                             <h3 class="text-xs font-bold uppercase tracking-wider text-[var(--gold)] pt-3">Como Deseja Receber?</h3>
                             <div class="grid grid-cols-2 gap-3">
-                                <label class="p-3 rounded-2xl border cursor-pointer flex items-center gap-2 transition {{ $tipo_entrega === 'entrega' ? 'border-[var(--gold)] bg-[var(--gold-bg)]' : 'border-[var(--border-card)] bg-[var(--bg-card-alt)]' }}">
-                                    <input type="radio" wire:model.live="tipo_entrega" value="entrega" class="text-[var(--gold)]">
+                                <label for="checkout-tipo-entrega" class="p-3 rounded-2xl border cursor-pointer flex items-center gap-2 transition {{ $tipo_entrega === 'entrega' ? 'border-[var(--gold)] bg-[var(--gold-bg)]' : 'border-[var(--border-card)] bg-[var(--bg-card-alt)]' }}">
+                                    <input id="checkout-tipo-entrega" type="radio" wire:model.live="tipo_entrega" value="entrega" class="text-[var(--gold)]">
                                     <span class="text-xs font-bold text-[var(--text-primary)]">Entregar no Endereço</span>
                                 </label>
-                                <label class="p-3 rounded-2xl border cursor-pointer flex items-center gap-2 transition {{ $tipo_entrega === 'retirada' ? 'border-[var(--gold)] bg-[var(--gold-bg)]' : 'border-[var(--border-card)] bg-[var(--bg-card-alt)]' }}">
-                                    <input type="radio" wire:model.live="tipo_entrega" value="retirada" class="text-[var(--gold)]">
+                                <label for="checkout-tipo-retirada" class="p-3 rounded-2xl border cursor-pointer flex items-center gap-2 transition {{ $tipo_entrega === 'retirada' ? 'border-[var(--gold)] bg-[var(--gold-bg)]' : 'border-[var(--border-card)] bg-[var(--bg-card-alt)]' }}">
+                                    <input id="checkout-tipo-retirada" type="radio" wire:model.live="tipo_entrega" value="retirada" class="text-[var(--gold)]">
                                     <span class="text-xs font-bold text-[var(--text-primary)]">Retirar na Loja</span>
                                 </label>
                             </div>
@@ -128,11 +128,11 @@
                                 <div class="space-y-2 p-3 bg-[var(--bg-card-alt)] rounded-2xl border border-[var(--border-card)]">
                                     <span class="text-xs font-semibold text-[var(--text-secondary)]">Selecione a unidade para retirada:</span>
                                     <div class="space-y-1.5">
-                                        <label class="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)] cursor-pointer">
-                                            <input type="radio" wire:model.live="loja_retirada" value="Irecê - Bahia"> Loja Irecê - Bahia (Centro)
+                                        <label for="checkout-loja-irece" class="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)] cursor-pointer">
+                                            <input id="checkout-loja-irece" type="radio" wire:model.live="loja_retirada" value="Irecê - Bahia"> Loja Irecê - Bahia (Centro)
                                         </label>
-                                        <label class="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)] cursor-pointer">
-                                            <input type="radio" wire:model.live="loja_retirada" value="Luís Eduardo Magalhães"> Loja Luís Eduardo Magalhães - Bahia
+                                        <label for="checkout-loja-lem" class="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)] cursor-pointer">
+                                            <input id="checkout-loja-lem" type="radio" wire:model.live="loja_retirada" value="Luís Eduardo Magalhães"> Loja Luís Eduardo Magalhães - Bahia
                                         </label>
                                     </div>
                                 </div>
@@ -140,35 +140,35 @@
                                 <div class="space-y-3 pt-2">
                                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                         <div>
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">CEP *</label>
-                                            <input type="text" wire:model.blur="cep" placeholder="44870-000" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-cep" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">CEP *</label>
+                                            <input id="checkout-cep" type="text" wire:model.blur="cep" placeholder="44870-000" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                             @error('cep') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                         <div class="sm:col-span-2">
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Rua / Logradouro *</label>
-                                            <input type="text" wire:model="rua" placeholder="Av. Principal" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-rua" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Rua / Logradouro *</label>
+                                            <input id="checkout-rua" type="text" wire:model="rua" placeholder="Av. Principal" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                             @error('rua') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
 
                                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
                                         <div>
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Número *</label>
-                                            <input type="text" wire:model="numero" placeholder="123" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-numero" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Número *</label>
+                                            <input id="checkout-numero" type="text" wire:model="numero" placeholder="123" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                             @error('numero') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                         <div>
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Complemento</label>
-                                            <input type="text" wire:model="complemento" placeholder="Apto 101" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-complemento" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Complemento</label>
+                                            <input id="checkout-complemento" type="text" wire:model="complemento" placeholder="Apto 101" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                         </div>
                                         <div>
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Bairro *</label>
-                                            <input type="text" wire:model="bairro" placeholder="Centro" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-bairro" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Bairro *</label>
+                                            <input id="checkout-bairro" type="text" wire:model="bairro" placeholder="Centro" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                             @error('bairro') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                         <div>
-                                            <label class="block text-xs font-semibold text-[var(--text-secondary)] mb-1">Cidade / UF *</label>
-                                            <input type="text" wire:model="cidade" placeholder="Irecê" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                                            <label for="checkout-cidade" class="block text-xs font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Cidade / UF *</label>
+                                            <input id="checkout-cidade" type="text" wire:model="cidade" placeholder="Irecê" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-xs text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                                             @error('cidade') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                                         </div>
                                     </div>

@@ -38,8 +38,9 @@
 
             <!-- Name -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">Nome Completo *</label>
+                <label for="name" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">Nome Completo *</label>
                 <input 
+                    id="name"
                     name="name" 
                     type="text" 
                     value="{{ old('name') }}" 
@@ -54,8 +55,9 @@
 
             <!-- Email Address -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">E-mail *</label>
+                <label for="email" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">E-mail *</label>
                 <input 
+                    id="email"
                     name="email" 
                     type="email" 
                     value="{{ old('email') }}" 
@@ -69,8 +71,9 @@
 
             <!-- Password -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">Senha de Acesso *</label>
+                <label for="password" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">Senha de Acesso *</label>
                 <input 
+                    id="password"
                     name="password" 
                     type="password" 
                     required 
@@ -83,8 +86,9 @@
 
             <!-- Confirm Password -->
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 mb-1">Confirmar Senha *</label>
+                <label for="password_confirmation" class="block text-xs font-semibold text-zinc-700 mb-1 cursor-pointer">Confirmar Senha *</label>
                 <input 
+                    id="password_confirmation"
                     name="password_confirmation" 
                     type="password" 
                     required 

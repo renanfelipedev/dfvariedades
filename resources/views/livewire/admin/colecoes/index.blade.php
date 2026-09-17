@@ -91,20 +91,20 @@
 
                 <form wire:submit="save" class="space-y-4 text-xs">
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Nome da Coleção *</label>
-                        <input type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Perfumaria Feminina" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="col-nome" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Nome da Coleção *</label>
+                        <input id="col-nome" type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Perfumaria Feminina" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('nome') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Slug da URL *</label>
-                        <input type="text" wire:model="slug" placeholder="perfumaria-feminina" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="col-slug" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Slug da URL *</label>
+                        <input id="col-slug" type="text" wire:model="slug" placeholder="perfumaria-feminina" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('slug') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Imagem de Capa -->
                     <div class="space-y-2">
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300">Foto / Imagem de Capa da Coleção</label>
+                        <label for="col-imagem-url" class="block font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">Foto / Imagem de Capa da Coleção</label>
                         <div class="flex items-center gap-3">
                             <div class="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
                                 @if($arquivoImagem)
@@ -124,6 +124,7 @@
                                     class="w-full text-[11px] text-zinc-500 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#C9A84C] file:text-black hover:file:opacity-90"
                                 >
                                 <input 
+                                    id="col-imagem-url"
                                     type="text" 
                                     wire:model="imagem_url" 
                                     placeholder="Ou digite/cole a URL externa da foto..." 
@@ -136,7 +137,7 @@
 
                     <!-- Banner de Topo da Coleção -->
                     <div class="space-y-2">
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300">Banner de Cabeçalho da Coleção</label>
+                        <label for="col-banner-url" class="block font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">Banner de Cabeçalho da Coleção</label>
                         <div class="flex items-center gap-3">
                             <div class="w-14 h-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
                                 @if($arquivoBanner)
@@ -156,6 +157,7 @@
                                     class="w-full text-[11px] text-zinc-500 file:mr-2 file:py-1 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#C9A84C] file:text-black hover:file:opacity-90"
                                 >
                                 <input 
+                                    id="col-banner-url"
                                     type="text" 
                                     wire:model="banner_url" 
                                     placeholder="Ou digite/cole a URL externa do banner..." 
@@ -167,18 +169,18 @@
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Descrição</label>
-                        <textarea wire:model="descricao" rows="2" placeholder="Resumo dos itens da coleção..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
+                        <label for="col-descricao" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Descrição</label>
+                        <textarea id="col-descricao" wire:model="descricao" rows="2" placeholder="Resumo dos itens da coleção..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Ordem</label>
-                            <input type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                            <label for="col-ordem" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Ordem</label>
+                            <input id="col-ordem" type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                         </div>
                         <div class="flex items-center gap-4 pt-4">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
+                            <label for="col-ativo" class="flex items-center gap-2 cursor-pointer">
+                                <input id="col-ativo" type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
                                 <span class="font-semibold text-emerald-600">Ativa</span>
                             </label>
                         </div>

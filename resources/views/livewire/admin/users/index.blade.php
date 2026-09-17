@@ -190,8 +190,9 @@
 
                 <form wire:submit.prevent="save" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Nome Completo *</label>
+                        <label for="user-name" class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 cursor-pointer">Nome Completo *</label>
                         <input 
+                            id="user-name"
                             type="text" 
                             wire:model="name"
                             placeholder="Ex: João Silva"
@@ -201,8 +202,9 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">E-mail de Acesso *</label>
+                        <label for="user-email" class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 cursor-pointer">E-mail de Acesso *</label>
                         <input 
+                            id="user-email"
                             type="email" 
                             wire:model="email"
                             placeholder="usuario@dfvariedades.com.br"
@@ -212,8 +214,9 @@
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Papel / Nível de Acesso (ACL) *</label>
+                        <label for="user-role" class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 cursor-pointer">Papel / Nível de Acesso (ACL) *</label>
                         <select 
+                            id="user-role"
                             wire:model="userRole"
                             class="w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm text-zinc-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-primary-500">
                             <option value="admin">Administrador Geral (Acesso total)</option>
@@ -226,10 +229,11 @@
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">
+                            <label for="user-password" class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 cursor-pointer">
                                 {{ $editingId ? 'Nova Senha (opcional)' : 'Senha de Acesso *' }}
                             </label>
                             <input 
+                                id="user-password"
                                 type="password" 
                                 wire:model="password"
                                 placeholder="{{ $editingId ? 'Deixe em branco p/ manter' : 'Mínimo 6 caracteres' }}"
@@ -239,8 +243,9 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">Confirmar Senha</label>
+                            <label for="user-password-confirmation" class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1 cursor-pointer">Confirmar Senha</label>
                             <input 
+                                id="user-password-confirmation"
                                 type="password" 
                                 wire:model="password_confirmation"
                                 placeholder="Confirme a senha"

@@ -154,8 +154,9 @@
 
             <!-- Notes Card -->
             <div class="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-xs space-y-4">
-                <h2 class="text-base font-bold text-zinc-900 dark:text-white">Observações Internas</h2>
+                <label for="pedido-observacoes" class="block text-base font-bold text-zinc-900 dark:text-white cursor-pointer">Observações Internas</label>
                 <textarea 
+                    id="pedido-observacoes"
                     wire:model="observacoes"
                     rows="3"
                     placeholder="Adicione observações sobre o atendimento, código de rastreio, detalhes de despacho..."

@@ -48,7 +48,7 @@ class Home extends Component
     {
         $marcas = Marca::ativo()->get();
         $banners = Banner::ativo()->get();
-        $flashDeal = Produto::with('marca')->flashDeal()->first();
+        $flashDeals = Produto::with('marca')->flashDeal()->get();
 
         $escolhidos = Produto::with('marca')->escolhidos()->limit(10)->get();
         $presentear = Produto::with('marca')->presentear()->limit(10)->get();
@@ -74,7 +74,7 @@ class Home extends Component
         return view('livewire.storefront.home', [
             'marcas' => $marcas,
             'banners' => $banners,
-            'flashDeal' => $flashDeal,
+            'flashDeals' => $flashDeals,
             'escolhidos' => $escolhidos,
             'presentear' => $presentear,
             'cabelos' => $cabelos,

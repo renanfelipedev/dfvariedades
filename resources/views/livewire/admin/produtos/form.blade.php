@@ -116,14 +116,14 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Nome do Produto *</label>
-                    <input type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Malbec Gold Desodorante Colônia 100ml" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('nome') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-nome" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Nome do Produto *</label>
+                    <input id="prod-nome" type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Malbec Gold Desodorante Colônia 100ml" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('nome') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     @error('nome') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Slug da URL *</label>
-                    <input type="text" wire:model="slug" placeholder="malbec-gold-colonia-100ml" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('slug') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-slug" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Slug da URL *</label>
+                    <input id="prod-slug" type="text" wire:model="slug" placeholder="malbec-gold-colonia-100ml" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('slug') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     <span class="text-[10px] text-zinc-400">Identificador amigável na URL do catálogo.</span>
                     @error('slug') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
@@ -131,8 +131,8 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Marca</label>
-                    <select wire:model="marca_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-marca" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Marca</label>
+                    <select id="prod-marca" wire:model="marca_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         <option value="">Selecione uma marca...</option>
                         @foreach($marcas as $m)
                             <option value="{{ $m->id }}">{{ $m->nome }}</option>
@@ -141,8 +141,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Coleção</label>
-                    <select wire:model.live="colecao_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-colecao" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Coleção</label>
+                    <select id="prod-colecao" wire:model.live="colecao_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         <option value="">Selecione uma coleção...</option>
                         @foreach($colecoes as $c)
                             <option value="{{ $c->id }}">{{ $c->nome }}</option>
@@ -151,8 +151,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Categoria</label>
-                    <select wire:model="categoria_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-categoria" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Categoria</label>
+                    <select id="prod-categoria" wire:model="categoria_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         <option value="">Selecione uma categoria...</option>
                         @foreach($categorias as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->nome }}</option>
@@ -172,36 +172,36 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Preço Normal (R$) *</label>
-                    <input type="text" wire:model="preco" placeholder="199,90" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('preco') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-preco" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Preço Normal (R$) *</label>
+                    <input id="prod-preco" type="text" wire:model="preco" placeholder="199,90" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('preco') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     @error('preco') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Preço Promocional (R$)</label>
-                    <input type="text" wire:model="preco_promocional" placeholder="149,90 (opcional)" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('preco_promocional') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-preco-promocional" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Preço Promocional (R$)</label>
+                    <input id="prod-preco-promocional" type="text" wire:model="preco_promocional" placeholder="149,90 (opcional)" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('preco_promocional') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     <span class="text-[10px] text-zinc-400">Se preenchido, exibirá selo de desconto.</span>
                     @error('preco_promocional') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Quantidade em Estoque *</label>
-                    <input type="number" wire:model="estoque" min="0" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('estoque') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-estoque" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Quantidade em Estoque *</label>
+                    <input id="prod-estoque" type="number" wire:model="estoque" min="0" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border @error('estoque') border-red-500 @else border-zinc-200 dark:border-zinc-800 @enderror rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     @error('estoque') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Alerta de Estoque Mínimo (unid.)</label>
-                    <input type="number" wire:model="estoque_minimo" min="0" placeholder="Padrão: 5" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-estoque-minimo" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Alerta de Estoque Mínimo (unid.)</label>
+                    <input id="prod-estoque-minimo" type="number" wire:model="estoque_minimo" min="0" placeholder="Padrão: 5" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     <span class="text-[10px] text-zinc-400">Gera alerta no painel quando o estoque for menor ou igual a este valor.</span>
                     @error('estoque_minimo') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Código SKU / Referência</label>
-                    <input type="text" wire:model="sku" placeholder="DFV-00123" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                    <label for="prod-sku" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Código SKU / Referência</label>
+                    <input id="prod-sku" type="text" wire:model="sku" placeholder="DFV-00123" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     <span class="text-[10px] text-zinc-400">Identificador interno para controle de inventário.</span>
                 </div>
             </div>
@@ -220,7 +220,7 @@
 
             <!-- Upload Dropzone -->
             <div class="space-y-3">
-                <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                <label for="file-upload-input" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">
                     Enviar Imagens do Computador (JPG, PNG, WEBP, AVIF)
                 </label>
                 
@@ -343,11 +343,12 @@
 
             <!-- Optional: Add Image via External URL -->
             <div class="pt-4 border-t border-zinc-100 dark:border-zinc-800 space-y-2">
-                <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                <label for="prod-nova-imagem-url" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">
                     Ou adicione uma imagem por Link / URL Externa
                 </label>
                 <div class="flex gap-2">
                     <input 
+                        id="prod-nova-imagem-url"
                         type="url" 
                         wire:model="novaImagemUrl" 
                         placeholder="https://exemplo.com/imagem-do-produto.jpg" 
@@ -373,13 +374,13 @@
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Descrição Curta</label>
-                <textarea wire:model="descricao" rows="3" placeholder="Resumo dos benefícios, notas olfativas e principais destaques..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
+                <label for="prod-descricao" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Descrição Curta</label>
+                <textarea id="prod-descricao" wire:model="descricao" rows="3" placeholder="Resumo dos benefícios, notas olfativas e principais destaques..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
             </div>
 
             <div>
-                <label class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Detalhes Adicionais (Modo de uso, composição, especificações)</label>
-                <textarea wire:model="detalhes" rows="4" placeholder="Informações detalhadas para orientar o cliente no momento da compra..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
+                <label for="prod-detalhes" class="block text-xs font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Detalhes Adicionais (Modo de uso, composição, especificações)</label>
+                <textarea id="prod-detalhes" wire:model="detalhes" rows="4" placeholder="Informações detalhadas para orientar o cliente no momento da compra..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
             </div>
         </div>
 
@@ -392,41 +393,41 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
-                    <input type="checkbox" wire:model="destaque" class="text-[#C9A84C] rounded accent-[#C9A84C]">
+                <label for="prod-destaque" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
+                    <input id="prod-destaque" type="checkbox" wire:model="destaque" class="text-[#C9A84C] rounded accent-[#C9A84C]">
                     <span class="text-xs font-semibold text-zinc-800 dark:text-zinc-200">Destaque Geral</span>
                 </label>
 
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
-                    <input type="checkbox" wire:model="escolhido" class="text-[#C9A84C] rounded accent-[#C9A84C]">
+                <label for="prod-escolhido" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
+                    <input id="prod-escolhido" type="checkbox" wire:model="escolhido" class="text-[#C9A84C] rounded accent-[#C9A84C]">
                     <span class="text-xs font-semibold text-zinc-800 dark:text-zinc-200">Escolhidos p/ Você</span>
                 </label>
 
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
-                    <input type="checkbox" wire:model="presente" class="text-[#C9A84C] rounded accent-[#C9A84C]">
+                <label for="prod-presente" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
+                    <input id="prod-presente" type="checkbox" wire:model="presente" class="text-[#C9A84C] rounded accent-[#C9A84C]">
                     <span class="text-xs font-semibold text-zinc-800 dark:text-zinc-200">P/ Presentear</span>
                 </label>
 
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
-                    <input type="checkbox" wire:model="cabelo" class="text-[#C9A84C] rounded accent-[#C9A84C]">
+                <label for="prod-cabelo" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] cursor-pointer transition">
+                    <input id="prod-cabelo" type="checkbox" wire:model="cabelo" class="text-[#C9A84C] rounded accent-[#C9A84C]">
                     <span class="text-xs font-semibold text-zinc-800 dark:text-zinc-200">Top Cabelo</span>
                 </label>
 
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-red-500 cursor-pointer transition">
-                    <input type="checkbox" wire:model.live="flash_deal" class="text-red-500 rounded accent-red-500">
+                <label for="prod-flash-deal" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-red-500 cursor-pointer transition">
+                    <input id="prod-flash-deal" type="checkbox" wire:model.live="flash_deal" class="text-red-500 rounded accent-red-500">
                     <span class="text-xs font-bold text-red-500">Oferta Relâmpago</span>
                 </label>
 
-                <label class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500 cursor-pointer transition">
-                    <input type="checkbox" wire:model="ativo" class="text-emerald-600 rounded accent-emerald-600">
+                <label for="prod-ativo" class="flex items-center gap-2.5 p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500 cursor-pointer transition">
+                    <input id="prod-ativo" type="checkbox" wire:model="ativo" class="text-emerald-600 rounded accent-emerald-600">
                     <span class="text-xs font-bold text-emerald-600">Produto Ativo na Loja</span>
                 </label>
             </div>
 
             @if($flash_deal)
                 <div class="pt-2 p-4 rounded-2xl bg-red-500/5 border border-red-500/20 space-y-2">
-                    <label class="block text-xs font-bold text-red-600 dark:text-red-400">Data e Hora de Término da Oferta Relâmpago *</label>
-                    <input type="datetime-local" wire:model="flash_deal_fim" class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-red-500">
+                    <label for="prod-flash-deal-fim" class="block text-xs font-bold text-red-600 dark:text-red-400 cursor-pointer">Data e Hora de Término da Oferta Relâmpago *</label>
+                    <input id="prod-flash-deal-fim" type="datetime-local" wire:model="flash_deal_fim" class="bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl px-3 py-2 text-xs text-zinc-900 dark:text-zinc-100 outline-none focus:border-red-500">
                     <span class="text-[10px] text-zinc-400 block">Após essa data/hora, o produto deixará a vitrine de ofertas relâmpago automaticamente.</span>
                 </div>
             @endif

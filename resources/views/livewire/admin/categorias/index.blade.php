@@ -108,8 +108,8 @@
 
                 <form wire:submit="save" class="space-y-3 text-xs">
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Coleção Vinculada</label>
-                        <select wire:model="colecao_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="cat-colecao" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Coleção Vinculada</label>
+                        <select id="cat-colecao" wire:model="colecao_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                             <option value="">Selecione a coleção...</option>
                             @foreach($colecoes as $col)
                                 <option value="{{ $col->id }}">{{ $col->nome }}</option>
@@ -118,30 +118,30 @@
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Nome da Categoria *</label>
-                        <input type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Eau de Parfum" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="cat-nome" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Nome da Categoria *</label>
+                        <input id="cat-nome" type="text" wire:model.live.debounce.300ms="nome" placeholder="Ex: Eau de Parfum" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('nome') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Slug da URL *</label>
-                        <input type="text" wire:model="slug" placeholder="eau-de-parfum" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="cat-slug" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Slug da URL *</label>
+                        <input id="cat-slug" type="text" wire:model="slug" placeholder="eau-de-parfum" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         @error('slug') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Descrição</label>
-                        <textarea wire:model="descricao" rows="2" placeholder="Resumo..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
+                        <label for="cat-descricao" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Descrição</label>
+                        <textarea id="cat-descricao" wire:model="descricao" rows="2" placeholder="Resumo..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]"></textarea>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3 items-center">
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Ordem</label>
-                            <input type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                            <label for="cat-ordem" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Ordem</label>
+                            <input id="cat-ordem" type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                         </div>
                         <div class="pt-4">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
+                            <label for="cat-ativo" class="flex items-center gap-2 cursor-pointer">
+                                <input id="cat-ativo" type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
                                 <span class="font-semibold text-emerald-600">Ativa</span>
                             </label>
                         </div>

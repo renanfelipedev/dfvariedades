@@ -75,18 +75,19 @@
 
                 <form wire:submit="save" class="space-y-4 text-xs">
                     <div>
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Título do Banner</label>
-                        <input type="text" wire:model="titulo" placeholder="Ex: Lançamentos de Perfumaria" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                        <label for="banner-titulo" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Título do Banner</label>
+                        <input id="banner-titulo" type="text" wire:model="titulo" placeholder="Ex: Lançamentos de Perfumaria" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                     </div>
 
                     <!-- Imagem / Upload -->
                     <div class="space-y-2">
-                        <label class="block font-semibold text-zinc-700 dark:text-zinc-300">
+                        <label for="banner-arquivo-midia" class="block font-semibold text-zinc-700 dark:text-zinc-300 cursor-pointer">
                             Imagem do Banner (Upload do Computador ou URL) *
                         </label>
                         
                         <div class="relative border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-[#C9A84C] rounded-2xl p-4 text-center transition bg-zinc-50/50 dark:bg-zinc-800/30 group">
                             <input 
+                                id="banner-arquivo-midia"
                                 type="file" 
                                 wire:model="arquivoMidia" 
                                 accept="image/*,video/*"
@@ -115,7 +116,7 @@
                         @endif
 
                         <div class="pt-1">
-                            <input type="text" wire:model="url_midia" placeholder="Ou digite/cole a URL externa da imagem..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                            <input id="banner-url-midia" type="text" wire:model="url_midia" placeholder="Ou digite/cole a URL externa da imagem..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                         </div>
                         @error('url_midia') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                         @error('arquivoMidia') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
@@ -123,43 +124,43 @@
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Tipo de Link</label>
-                            <select wire:model.live="link_tipo" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
+                            <label for="banner-link-tipo" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Tipo de Link</label>
+                            <select id="banner-link-tipo" wire:model.live="link_tipo" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none focus:border-[#C9A84C]">
                                 <option value="colecao">Coleção</option>
                                 <option value="marca">Marca</option>
                                 <option value="url">Link Externo</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Destino</label>
+                            <label for="banner-link-destino" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Destino</label>
                             @if($link_tipo === 'colecao')
-                                <select wire:model="link_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                                <select id="banner-link-destino" wire:model="link_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                                     <option value="">Selecione a Coleção...</option>
                                     @foreach($colecoes as $col)
                                         <option value="{{ $col->id }}">{{ $col->nome }}</option>
                                     @endforeach
                                 </select>
                             @elseif($link_tipo === 'marca')
-                                <select wire:model="link_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                                <select id="banner-link-destino" wire:model="link_id" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                                     <option value="">Selecione a Marca...</option>
                                     @foreach($marcas as $m)
                                         <option value="{{ $m->id }}">{{ $m->nome }}</option>
                                     @endforeach
                                 </select>
                             @else
-                                <input type="text" wire:model="link_url" placeholder="https://..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                                <input id="banner-link-destino" type="text" wire:model="link_url" placeholder="https://..." class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                             @endif
                         </div>
                     </div>
 
                     <div class="grid grid-cols-2 gap-3 items-center">
                         <div>
-                            <label class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1">Ordem de Exibição</label>
-                            <input type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
+                            <label for="banner-ordem" class="block font-semibold text-zinc-700 dark:text-zinc-300 mb-1 cursor-pointer">Ordem de Exibição</label>
+                            <input id="banner-ordem" type="number" wire:model="ordem" min="1" class="w-full bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-800 rounded-xl px-3 py-2 text-zinc-900 dark:text-zinc-100 outline-none">
                         </div>
                         <div class="pt-4">
-                            <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
+                            <label for="banner-ativo" class="flex items-center gap-2 cursor-pointer">
+                                <input id="banner-ativo" type="checkbox" wire:model="ativo" class="text-[#C9A84C] rounded">
                                 <span class="font-semibold text-emerald-600">Banner Ativo</span>
                             </label>
                         </div>

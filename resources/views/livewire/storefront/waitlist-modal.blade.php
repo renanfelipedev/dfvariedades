@@ -29,31 +29,31 @@
 
                 <form wire:submit="submit" class="space-y-3 text-xs">
                     <div>
-                        <label class="block font-semibold text-[var(--text-secondary)] mb-1">Seu Nome *</label>
-                        <input type="text" wire:model="nome" placeholder="Ex: Maria Santos" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                        <label for="waitlist-nome" class="block font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Seu Nome *</label>
+                        <input id="waitlist-nome" type="text" wire:model="nome" placeholder="Ex: Maria Santos" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                         @error('nome') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-[var(--text-secondary)] mb-1">WhatsApp *</label>
-                        <input type="tel" wire:model="whatsapp" placeholder="(74) 99999-9999" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                        <label for="waitlist-whatsapp" class="block font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">WhatsApp *</label>
+                        <input id="waitlist-whatsapp" type="tel" wire:model="whatsapp" placeholder="(74) 99999-9999" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                         @error('whatsapp') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                     </div>
 
                     <div>
-                        <label class="block font-semibold text-[var(--text-secondary)] mb-1">E-mail (Opcional)</label>
-                        <input type="email" wire:model="email" placeholder="seu@email.com" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                        <label for="waitlist-email" class="block font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">E-mail (Opcional)</label>
+                        <input id="waitlist-email" type="email" wire:model="email" placeholder="seu@email.com" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                     </div>
 
                     <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-[var(--text-secondary)] mb-1">CEP *</label>
-                            <input type="text" wire:model="cep" placeholder="00000-000" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                            <label for="waitlist-cep" class="block font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">CEP *</label>
+                            <input id="waitlist-cep" type="text" wire:model="cep" placeholder="00000-000" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                             @error('cep') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                         </div>
                         <div>
-                            <label class="block font-semibold text-[var(--text-secondary)] mb-1">Cidade / UF *</label>
-                            <input type="text" wire:model="cidade" placeholder="Sua Cidade" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
+                            <label for="waitlist-cidade" class="block font-semibold text-[var(--text-secondary)] mb-1 cursor-pointer">Cidade / UF *</label>
+                            <input id="waitlist-cidade" type="text" wire:model="cidade" placeholder="Sua Cidade" class="w-full bg-[var(--bg-card-alt)] border border-[var(--border-card)] rounded-xl px-3 py-2.5 text-[var(--text-primary)] outline-none focus:border-[var(--gold)]">
                             @error('cidade') <span class="text-[10px] text-red-500">{{ $message }}</span> @enderror
                         </div>
                     </div>
