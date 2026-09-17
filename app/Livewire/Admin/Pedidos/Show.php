@@ -9,6 +9,17 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class Show extends Component
 {
+    public const STATUS_LABELS = [
+        'pendente' => 'Pendente',
+        'aguardando_pagamento' => 'Aguardando Pagamento',
+        'pago' => 'Pago',
+        'em_separacao' => 'Em Separação',
+        'pronto_retirada' => 'Pronto para Retirada',
+        'enviado' => 'Enviado',
+        'entregue' => 'Entregue',
+        'cancelado' => 'Cancelado',
+    ];
+
     public Pedido $pedido;
 
     public string $status = '';
@@ -24,37 +35,28 @@ class Show extends Component
 
     public function updateStatus(string $newStatus): void
     {
-        $allowedStatuses = [
-            'aguardando_pagamento',
-            'pago',
-            'em_separacao',
-            'pronto_retirada',
-            'enviado',
-            'entregue',
-            'cancelado',
-        ];
-
-        if (! in_array($newStatus, $allowedStatuses, true)) {
-            session()->flash('error', 'Status inválido informado.');
+        if (! array_key_exists($newStatus, self::STATUS_LABELS)) {
+            $this->dispatch('toast', message: 'Status inválido informado.');
 
             return;
         }
 
-        $this->pedido->update([
-            'status' => $newStatus,
-        ]);
-
+        $this->pedido->status = $newStatus;
+        $this->pedido->save();
+        $this->pedido->refresh();
         $this->status = $newStatus;
-        session()->flash('message', 'Status do pedido atualizado para: '.ucwords(str_replace('_', ' ', $newStatus)));
+
+        $label = self::STATUS_LABELS[$newStatus] ?? $newStatus;
+        $this->dispatch('toast', message: "Status do pedido atualizado para: {$label}!");
     }
 
     public function saveObservacoes(): void
     {
-        $this->pedido->update([
-            'observacoes' => $this->observacoes,
-        ]);
+        $this->pedido->observacoes = $this->observacoes;
+        $this->pedido->save();
+        $this->pedido->refresh();
 
-        session()->flash('message', 'Observações salvas com sucesso!');
+        $this->dispatch('toast', message: 'Observações do pedido salvas com sucesso!');
     }
 
     public function getWhatsappLinkProperty(): string
@@ -64,7 +66,8 @@ class Show extends Component
             $phone = '55'.$phone;
         }
 
-        $msg = "Olá {$this->pedido->nome_cliente}! Somos da *DF Variedades*. Entramos em contato referente ao seu pedido *#{$this->pedido->codigo}* (Status atual: ".ucwords(str_replace('_', ' ', $this->pedido->status)).').';
+        $statusLabel = self::STATUS_LABELS[$this->pedido->status] ?? $this->pedido->status;
+        $msg = "Olá {$this->pedido->nome_cliente}! Somos da *DF Variedades*. Entramos em contato referente ao seu pedido *#{$this->pedido->codigo}* (Status atual: {$statusLabel}).";
 
         return "https://api.whatsapp.com/send?phone={$phone}&text=".urlencode($msg);
     }

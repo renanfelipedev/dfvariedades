@@ -15,6 +15,8 @@
                 '' => 'Todos (' . $contagem['todos'] . ')',
                 'pendente' => 'Pendentes (' . $contagem['pendente'] . ')',
                 'pago' => 'Pagos (' . $contagem['pago'] . ')',
+                'em_separacao' => 'Em Separação (' . $contagem['em_separacao'] . ')',
+                'pronto_retirada' => 'Pronto Retirada (' . $contagem['pronto_retirada'] . ')',
                 'enviado' => 'Enviados (' . $contagem['enviado'] . ')',
                 'entregue' => 'Entregues (' . $contagem['entregue'] . ')',
                 'cancelado' => 'Cancelados (' . $contagem['cancelado'] . ')',
@@ -87,8 +89,10 @@
                                     wire:change="updateStatus({{ $ped->id }}, $event.target.value)" 
                                     class="bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg px-2 py-1 text-[11px] font-bold outline-none cursor-pointer"
                                 >
-                                    <option value="pendente" {{ $ped->status === 'pendente' ? 'selected' : '' }}>Pendente</option>
+                                    <option value="pendente" {{ in_array($ped->status, ['pendente', 'aguardando_pagamento']) ? 'selected' : '' }}>Pendente</option>
                                     <option value="pago" {{ $ped->status === 'pago' ? 'selected' : '' }}>Pago</option>
+                                    <option value="em_separacao" {{ $ped->status === 'em_separacao' ? 'selected' : '' }}>Em Separação</option>
+                                    <option value="pronto_retirada" {{ $ped->status === 'pronto_retirada' ? 'selected' : '' }}>Pronto Retirada</option>
                                     <option value="enviado" {{ $ped->status === 'enviado' ? 'selected' : '' }}>Enviado</option>
                                     <option value="entregue" {{ $ped->status === 'entregue' ? 'selected' : '' }}>Entregue</option>
                                     <option value="cancelado" {{ $ped->status === 'cancelado' ? 'selected' : '' }}>Cancelado</option>

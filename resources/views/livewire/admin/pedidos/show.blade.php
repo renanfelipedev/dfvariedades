@@ -11,19 +11,22 @@
                 <div class="flex items-center gap-3">
                     <h1 class="text-2xl font-black tracking-tight text-zinc-900 dark:text-white">Pedido #{{ $pedido->codigo }}</h1>
                     @php
-                        $statusStyles = [
-                            'aguardando_pagamento' => 'bg-amber-500/10 text-amber-500 border-amber-500/20',
-                            'pago' => 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20',
-                            'em_separacao' => 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-                            'pronto_retirada' => 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-                            'enviado' => 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20',
-                            'entregue' => 'bg-emerald-500/10 text-emerald-600 border-emerald-500/30',
-                            'cancelado' => 'bg-rose-500/10 text-rose-500 border-rose-500/20',
+                        $statusMap = [
+                            'pendente' => ['label' => 'Pendente', 'style' => 'bg-amber-500/10 text-amber-500 border-amber-500/30'],
+                            'aguardando_pagamento' => ['label' => 'Aguardando Pagamento', 'style' => 'bg-amber-500/10 text-amber-500 border-amber-500/30'],
+                            'pago' => ['label' => 'Pago', 'style' => 'bg-emerald-500/10 text-emerald-500 border-emerald-500/30'],
+                            'em_separacao' => ['label' => 'Em Separação', 'style' => 'bg-blue-500/10 text-blue-500 border-blue-500/30'],
+                            'pronto_retirada' => ['label' => 'Pronto Retirada', 'style' => 'bg-purple-500/10 text-purple-500 border-purple-500/30'],
+                            'enviado' => ['label' => 'Enviado', 'style' => 'bg-indigo-500/10 text-indigo-500 border-indigo-500/30'],
+                            'entregue' => ['label' => 'Entregue', 'style' => 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/40'],
+                            'cancelado' => ['label' => 'Cancelado', 'style' => 'bg-rose-500/10 text-rose-500 border-rose-500/30'],
                         ];
-                        $badgeStyle = $statusStyles[$pedido->status] ?? 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20';
+                        $currStatus = $this->status ?: $pedido->status;
+                        $badgeInfo = $statusMap[$currStatus] ?? ['label' => str_replace('_', ' ', $currStatus), 'style' => 'bg-zinc-500/10 text-zinc-500 border-zinc-500/20'];
                     @endphp
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border {{ $badgeStyle }}">
-                        {{ str_replace('_', ' ', $pedido->status) }}
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border {{ $badgeInfo['style'] }}">
+                        <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
+                        {{ $badgeInfo['label'] }}
                     </span>
                 </div>
                 <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
@@ -52,19 +55,20 @@
                 <p class="text-sm text-zinc-600 dark:text-zinc-300 mt-0.5">Avance o fluxo conforme o andamento do pagamento e despacho.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-                @foreach([
-                    'aguardando_pagamento' => ['label' => 'Aguardando', 'color' => 'hover:bg-amber-500/20 text-amber-500 border-amber-500/30'],
-                    'pago' => ['label' => 'Pago', 'color' => 'hover:bg-emerald-500/20 text-emerald-500 border-emerald-500/30'],
-                    'em_separacao' => ['label' => 'Em Separação', 'color' => 'hover:bg-blue-500/20 text-blue-500 border-blue-500/30'],
-                    'pronto_retirada' => ['label' => 'Pronto Retirada', 'color' => 'hover:bg-purple-500/20 text-purple-500 border-purple-500/30'],
-                    'enviado' => ['label' => 'Enviado', 'color' => 'hover:bg-indigo-500/20 text-indigo-500 border-indigo-500/30'],
-                    'entregue' => ['label' => 'Entregue', 'color' => 'hover:bg-emerald-600/20 text-emerald-600 border-emerald-600/30'],
-                    'cancelado' => ['label' => 'Cancelar', 'color' => 'hover:bg-rose-500/20 text-rose-500 border-rose-500/30'],
-                ] as $key => $opt)
+                @foreach($statusMap as $key => $opt)
+                    @php
+                        $isActive = ($currStatus === $key);
+                    @endphp
                     <button 
                         type="button" 
                         wire:click="updateStatus('{{ $key }}')"
-                        class="px-3 py-1.5 rounded-xl text-xs font-bold border transition {{ $pedido->status === $key ? 'bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-zinc-900 dark:border-white shadow-xs' : 'bg-transparent text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 ' . $opt['color'] }}">
+                        wire:key="status-btn-{{ $key }}"
+                        class="px-3 py-1.5 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center gap-1.5 {{ $isActive ? 'bg-[#C9A84C] text-black border-[#C9A84C] shadow-xs ring-2 ring-[#C9A84C]/30 font-extrabold' : 'bg-transparent text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-800 hover:border-[#C9A84C] hover:text-zinc-900 dark:hover:text-white' }}">
+                        @if($isActive)
+                            <svg class="w-3.5 h-3.5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                            </svg>
+                        @endif
                         {{ $opt['label'] }}
                     </button>
                 @endforeach
@@ -160,8 +164,16 @@
                     <button 
                         type="button" 
                         wire:click="saveObservacoes"
-                        class="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold text-xs hover:opacity-90 transition shadow-xs">
-                        Salvar Observação
+                        wire:loading.attr="disabled"
+                        class="px-4 py-2 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-bold text-xs hover:opacity-90 transition shadow-xs cursor-pointer disabled:opacity-50 inline-flex items-center gap-2">
+                        <span wire:loading.remove wire:target="saveObservacoes">Salvar Observação</span>
+                        <span wire:loading wire:target="saveObservacoes" class="inline-flex items-center gap-1.5">
+                            <svg class="animate-spin -ml-1 mr-1 h-3.5 w-3.5" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Salvando...
+                        </span>
                     </button>
                 </div>
             </div>

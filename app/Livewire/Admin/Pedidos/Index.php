@@ -38,7 +38,8 @@ class Index extends Component
         if ($pedido) {
             $pedido->status = $newStatus;
             $pedido->save();
-            $this->dispatch('toast', message: "Status do pedido #{$pedido->codigo} atualizado para {$newStatus}!");
+            $label = Show::STATUS_LABELS[$newStatus] ?? ucwords(str_replace('_', ' ', $newStatus));
+            $this->dispatch('toast', message: "Status do pedido #{$pedido->codigo} atualizado para: {$label}!");
         }
     }
 
@@ -62,15 +63,21 @@ class Index extends Component
         }
 
         if ($this->statusFilter) {
-            $query->where('status', $this->statusFilter);
+            if ($this->statusFilter === 'pendente') {
+                $query->whereIn('status', ['pendente', 'aguardando_pagamento']);
+            } else {
+                $query->where('status', $this->statusFilter);
+            }
         }
 
         $pedidos = $query->latest()->paginate(12);
 
         $contagem = [
             'todos' => Pedido::count(),
-            'pendente' => Pedido::where('status', 'pendente')->count(),
+            'pendente' => Pedido::whereIn('status', ['pendente', 'aguardando_pagamento'])->count(),
             'pago' => Pedido::where('status', 'pago')->count(),
+            'em_separacao' => Pedido::where('status', 'em_separacao')->count(),
+            'pronto_retirada' => Pedido::where('status', 'pronto_retirada')->count(),
             'enviado' => Pedido::where('status', 'enviado')->count(),
             'entregue' => Pedido::where('status', 'entregue')->count(),
             'cancelado' => Pedido::where('status', 'cancelado')->count(),

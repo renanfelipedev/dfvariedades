@@ -6,6 +6,7 @@ use App\Models\Marca;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -78,12 +79,15 @@ class Index extends Component
 
     public function save(): void
     {
+        $this->slug = $this->slug ? Str::slug($this->slug) : Str::slug($this->nome);
+
         $this->validate([
             'nome' => 'required|min:2',
-            'slug' => 'required|unique:marcas,slug,'.($this->editingId ?: 'NULL').',id',
+            'slug' => ['required', Rule::unique('marcas', 'slug')->ignore($this->editingId)],
             'arquivoLogo' => 'nullable|image|max:10240',
         ], [
             'nome.required' => 'Informe o nome da marca',
+            'slug.unique' => 'Este slug já está em uso por outra marca.',
             'arquivoLogo.image' => 'O arquivo enviado deve ser uma imagem válida',
         ]);
 

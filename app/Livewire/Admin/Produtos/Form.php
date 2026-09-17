@@ -9,6 +9,7 @@ use App\Models\Produto;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -161,11 +162,38 @@ class Form extends Component
         }
     }
 
-    public function save(): mixed
+    public function save(bool $createAnother = false): mixed
     {
+        // Normaliza formatos de preço brasileiro (ex: "199,90" ou "1.299,90" -> "199.90")
+        if (is_string($this->preco)) {
+            $cleanPreco = trim($this->preco);
+            $cleanPreco = str_replace(['R$', ' '], '', $cleanPreco);
+            if (str_contains($cleanPreco, ',') && str_contains($cleanPreco, '.')) {
+                $cleanPreco = str_replace('.', '', $cleanPreco);
+                $cleanPreco = str_replace(',', '.', $cleanPreco);
+            } elseif (str_contains($cleanPreco, ',')) {
+                $cleanPreco = str_replace(',', '.', $cleanPreco);
+            }
+            $this->preco = $cleanPreco;
+        }
+
+        if ($this->preco_promocional !== '' && $this->preco_promocional !== null) {
+            $cleanPromo = trim((string) $this->preco_promocional);
+            $cleanPromo = str_replace(['R$', ' '], '', $cleanPromo);
+            if (str_contains($cleanPromo, ',') && str_contains($cleanPromo, '.')) {
+                $cleanPromo = str_replace('.', '', $cleanPromo);
+                $cleanPromo = str_replace(',', '.', $cleanPromo);
+            } elseif (str_contains($cleanPromo, ',')) {
+                $cleanPromo = str_replace(',', '.', $cleanPromo);
+            }
+            $this->preco_promocional = $cleanPromo;
+        }
+
+        $this->slug = $this->slug ? Str::slug($this->slug) : Str::slug($this->nome);
+
         $this->validate([
-            'nome' => 'required|min:3',
-            'slug' => 'required|unique:produtos,slug,'.($this->produtoId ?: 'NULL').',id',
+            'nome' => 'required|min:2',
+            'slug' => ['required', Rule::unique('produtos', 'slug')->ignore($this->produtoId)],
             'preco' => 'required|numeric|min:0.01',
             'preco_promocional' => 'nullable|numeric|min:0',
             'estoque' => 'required|integer|min:0',
@@ -173,8 +201,14 @@ class Form extends Component
             'novasImagens.*' => 'nullable|image|max:10240', // max 10MB per image
         ], [
             'nome.required' => 'Informe o nome do produto',
-            'slug.unique' => 'Este slug já está sendo utilizado',
+            'nome.min' => 'O nome do produto deve ter pelo menos 2 caracteres',
+            'slug.required' => 'Informe o slug do produto',
+            'slug.unique' => 'Este slug já está em uso por outro produto.',
             'preco.required' => 'Informe o preço do produto',
+            'preco.numeric' => 'O preço deve ser um número válido (ex: 99.90 ou 99,90)',
+            'preco.min' => 'O preço deve ser maior que zero',
+            'estoque.required' => 'Informe a quantidade em estoque',
+            'estoque.integer' => 'A quantidade em estoque deve ser um número inteiro',
             'novasImagens.*.image' => 'O arquivo enviado deve ser uma imagem válida (JPG, PNG, WEBP, GIF, AVIF).',
             'novasImagens.*.max' => 'Cada imagem deve ter no máximo 10MB.',
         ]);
@@ -202,10 +236,10 @@ class Form extends Component
             'marca_id' => $this->marca_id ?: null,
             'colecao_id' => $this->colecao_id ?: null,
             'categoria_id' => $this->categoria_id ?: null,
-            'preco' => (float) str_replace(',', '.', $this->preco),
-            'preco_promocional' => $this->preco_promocional !== '' ? (float) str_replace(',', '.', $this->preco_promocional) : null,
-            'estoque' => $this->estoque,
-            'estoque_minimo' => $this->estoque_minimo !== null ? $this->estoque_minimo : 5,
+            'preco' => (float) $this->preco,
+            'preco_promocional' => ($this->preco_promocional !== '' && $this->preco_promocional !== null) ? (float) $this->preco_promocional : null,
+            'estoque' => (int) $this->estoque,
+            'estoque_minimo' => $this->estoque_minimo !== null ? (int) $this->estoque_minimo : 5,
             'sku' => $this->sku ?: null,
             'descricao' => $this->descricao ?: null,
             'detalhes' => $this->detalhes ?: null,
@@ -228,9 +262,44 @@ class Form extends Component
             $msg = 'Produto cadastrado com sucesso!';
         }
 
+        if ($createAnother) {
+            $this->reset([
+                'produtoId',
+                'nome',
+                'slug',
+                'preco',
+                'preco_promocional',
+                'sku',
+                'descricao',
+                'detalhes',
+                'novasImagens',
+                'imagensExistentes',
+                'novaImagemUrl',
+                'destaque',
+                'escolhido',
+                'presente',
+                'cabelo',
+                'flash_deal',
+                'flash_deal_fim',
+            ]);
+            $this->estoque = 10;
+            $this->estoque_minimo = 5;
+            $this->ativo = true;
+
+            $this->dispatch('toast', message: $msg.' Pronto para cadastrar o próximo.');
+            $this->dispatch('scroll-to-top');
+
+            return null;
+        }
+
         session()->flash('toast', $msg);
 
-        return redirect()->route('admin.produtos.index');
+        return $this->redirectRoute('admin.produtos.index', navigate: true);
+    }
+
+    public function saveAndCreateAnother(): void
+    {
+        $this->save(createAnother: true);
     }
 
     public function render(): View

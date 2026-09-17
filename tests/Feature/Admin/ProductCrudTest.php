@@ -109,7 +109,7 @@ test('admin can edit an existing product', function () {
     ]);
 });
 
-test('admin can delete a product', function () {
+test('admin can delete a product and immediately reuse its slug', function () {
     $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);
     $marca = Marca::create(['nome' => 'Sony', 'slug' => 'sony']);
     $cat = Categoria::create(['nome' => 'Consoles', 'slug' => 'consoles']);
@@ -129,7 +129,50 @@ test('admin can delete a product', function () {
         ->call('confirmDelete', $produto->id)
         ->call('delete');
 
-    $this->assertSoftDeleted('produtos', [
+    $this->assertDatabaseMissing('produtos', [
         'id' => $produto->id,
+    ]);
+
+    // Ensure slug is immediately free to be reused without conflict
+    $novoProduto = Produto::create([
+        'nome' => 'PlayStation 5 Slim',
+        'slug' => 'playstation-5-slim',
+        'preco' => 3799,
+        'estoque' => 5,
+        'ativo' => true,
+        'marca_id' => $marca->id,
+        'categoria_id' => $cat->id,
+    ]);
+
+    $this->assertDatabaseHas('produtos', [
+        'id' => $novoProduto->id,
+        'slug' => 'playstation-5-slim',
+    ]);
+});
+
+test('admin can save and immediately create another product without leaving the form', function () {
+    $admin = User::factory()->create(['role' => User::ROLE_ADMIN]);
+    $marca = Marca::create(['nome' => 'Natura', 'slug' => 'natura']);
+    $cat = Categoria::create(['nome' => 'Perfumaria', 'slug' => 'perfumaria']);
+
+    Livewire::actingAs($admin)
+        ->test(Form::class)
+        ->set('nome', 'Perfume Kaiak 100ml')
+        ->set('slug', 'perfume-kaiak-100ml')
+        ->set('preco', '159,90') // test comma format
+        ->set('preco_promocional', '129,90')
+        ->set('estoque', 20)
+        ->set('marca_id', $marca->id)
+        ->set('categoria_id', $cat->id)
+        ->call('saveAndCreateAnother')
+        ->assertHasNoErrors()
+        ->assertDispatched('toast')
+        ->assertSet('nome', '')
+        ->assertSet('preco', '');
+
+    $this->assertDatabaseHas('produtos', [
+        'slug' => 'perfume-kaiak-100ml',
+        'preco' => 159.90,
+        'preco_promocional' => 129.90,
     ]);
 });

@@ -6,6 +6,7 @@ use App\Models\Colecao;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -83,11 +84,18 @@ class Index extends Component
 
     public function save(): void
     {
+        $this->slug = $this->slug ? Str::slug($this->slug) : Str::slug($this->nome);
+
         $this->validate([
             'nome' => 'required|min:2',
-            'slug' => 'required|unique:colecoes,slug,'.($this->editingId ?: 'NULL').',id',
+            'slug' => ['required', Rule::unique('colecoes', 'slug')->ignore($this->editingId)],
             'arquivoImagem' => 'nullable|image|max:10240',
             'arquivoBanner' => 'nullable|image|max:15360',
+        ], [
+            'nome.required' => 'Informe o nome da coleção',
+            'slug.unique' => 'Este slug já está em uso por outra coleção.',
+            'arquivoImagem.image' => 'O arquivo da imagem deve ser uma imagem válida',
+            'arquivoBanner.image' => 'O arquivo do banner deve ser uma imagem válida',
         ]);
 
         $finalImagemUrl = $this->imagem_url;

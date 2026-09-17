@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Colecao;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -68,9 +69,14 @@ class Index extends Component
 
     public function save(): void
     {
+        $this->slug = $this->slug ? Str::slug($this->slug) : Str::slug($this->nome);
+
         $this->validate([
             'nome' => 'required|min:2',
-            'slug' => 'required|unique:categorias,slug,'.($this->editingId ?: 'NULL').',id',
+            'slug' => ['required', Rule::unique('categorias', 'slug')->ignore($this->editingId)],
+        ], [
+            'nome.required' => 'Informe o nome da categoria',
+            'slug.unique' => 'Este slug já está em uso por outra categoria.',
         ]);
 
         $data = [

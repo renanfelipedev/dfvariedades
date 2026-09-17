@@ -1,69 +1,118 @@
-<x-layouts::auth :title="__('Register')">
+<x-layouts::auth :title="__('Cadastro de Cliente')">
     <div class="flex flex-col gap-6">
-        <x-auth-header :title="__('Create an account')" :description="__('Enter your details below to create your account')" />
+        
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#B8892E]/10 text-[#8A6B2C] border border-[#B8892E]/25">
+                ✨ Conta de Cliente DF Variedades
+            </span>
+            <h1 class="text-2xl font-bold tracking-tight text-zinc-900 font-serif-title">
+                Crie sua Conta
+            </h1>
+            <p class="text-xs text-zinc-600">
+                Cadastre-se para comprar com rapidez, salvar seus endereços e acompanhar seus pedidos.
+            </p>
+        </div>
+
+        <!-- Benefits Highlights -->
+        <div class="grid grid-cols-3 gap-2 p-3 rounded-2xl bg-[#FDFBF7] border border-[#B8892E]/20 text-center text-[10px] text-zinc-700 shadow-2xs">
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-base">⚡</span>
+                <span class="font-bold text-zinc-900">Compra Rápida</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 border-x border-[#B8892E]/20">
+                <span class="text-base">📦</span>
+                <span class="font-bold text-zinc-900">Rastreio Fácil</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+                <span class="text-base">🏷️</span>
+                <span class="font-bold text-zinc-900">Ofertas VIP</span>
+            </div>
+        </div>
 
         <!-- Session Status -->
         <x-auth-session-status class="text-center" :status="session('status')" />
 
-        <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-6">
+        <form method="POST" action="{{ route('register.store') }}" class="flex flex-col gap-4">
             @csrf
+
             <!-- Name -->
-            <flux:input
-                name="name"
-                :label="__('Name')"
-                :value="old('name')"
-                type="text"
-                required
-                autofocus
-                autocomplete="name"
-                :placeholder="__('Full name')"
-            />
+            <div>
+                <label class="block text-xs font-semibold text-zinc-700 mb-1">Nome Completo *</label>
+                <input 
+                    name="name" 
+                    type="text" 
+                    value="{{ old('name') }}" 
+                    required 
+                    autofocus 
+                    autocomplete="name" 
+                    placeholder="Ex: Maria Silva"
+                    class="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-[#B8892E] focus:bg-white transition shadow-2xs"
+                >
+                @error('name') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
+            </div>
 
             <!-- Email Address -->
-            <flux:input
-                name="email"
-                :label="__('Email address')"
-                :value="old('email')"
-                type="email"
-                required
-                autocomplete="email"
-                placeholder="email@example.com"
-            />
+            <div>
+                <label class="block text-xs font-semibold text-zinc-700 mb-1">E-mail *</label>
+                <input 
+                    name="email" 
+                    type="email" 
+                    value="{{ old('email') }}" 
+                    required 
+                    autocomplete="email" 
+                    placeholder="seu.email@exemplo.com"
+                    class="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-[#B8892E] focus:bg-white transition shadow-2xs"
+                >
+                @error('email') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
+            </div>
 
             <!-- Password -->
-            <flux:input
-                name="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="new-password"
-                :placeholder="__('Password')"
-                passwordrules="{{ \Illuminate\Validation\Rules\Password::defaults()->toPasswordRulesString() }}"
-                viewable
-            />
+            <div>
+                <label class="block text-xs font-semibold text-zinc-700 mb-1">Senha de Acesso *</label>
+                <input 
+                    name="password" 
+                    type="password" 
+                    required 
+                    autocomplete="new-password" 
+                    placeholder="Mínimo de 8 caracteres"
+                    class="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-[#B8892E] focus:bg-white transition shadow-2xs"
+                >
+                @error('password') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
+            </div>
 
             <!-- Confirm Password -->
-            <flux:input
-                name="password_confirmation"
-                :label="__('Confirm password')"
-                type="password"
-                required
-                autocomplete="new-password"
-                :placeholder="__('Confirm password')"
-                passwordrules="{{ \Illuminate\Validation\Rules\Password::defaults()->toPasswordRulesString() }}"
-                viewable
-            />
+            <div>
+                <label class="block text-xs font-semibold text-zinc-700 mb-1">Confirmar Senha *</label>
+                <input 
+                    name="password_confirmation" 
+                    type="password" 
+                    required 
+                    autocomplete="new-password" 
+                    placeholder="Repita sua senha"
+                    class="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-[#B8892E] focus:bg-white transition shadow-2xs"
+                >
+                @error('password_confirmation') <span class="text-[10px] text-red-500 font-semibold block mt-1">{{ $message }}</span> @enderror
+            </div>
 
-            <div class="flex items-center justify-end">
-                <flux:button type="submit" variant="primary" class="w-full" data-test="register-user-button">
-                    {{ __('Create account') }}
-                </flux:button>
+            <!-- Submit Button (High Contrast, Gold, Bold) -->
+            <div class="pt-2">
+                <button 
+                    type="submit" 
+                    data-test="register-user-button"
+                    class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#B8892E] via-[#C9A84C] to-[#D4A843] text-black font-extrabold text-sm shadow-md hover:shadow-lg hover:brightness-105 transition cursor-pointer flex items-center justify-center gap-2">
+                    <span>Criar Minha Conta de Cliente</span>
+                    <span class="text-black font-extrabold">→</span>
+                </button>
             </div>
         </form>
 
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
-            <span>{{ __('Already have an account?') }}</span>
-            <flux:link :href="route('login')" wire:navigate>{{ __('Log in') }}</flux:link>
+        <div class="space-x-1 text-center text-xs text-zinc-600 pt-2 border-t border-zinc-100">
+            <span>Já possui uma conta?</span>
+            <a href="{{ route('login') }}" class="text-[#B8892E] hover:text-[#8A6B2C] font-bold hover:underline" wire:navigate>
+                Entrar aqui
+            </a>
         </div>
+
     </div>
 </x-layouts::auth>

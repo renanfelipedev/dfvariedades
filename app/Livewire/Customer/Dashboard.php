@@ -33,7 +33,7 @@ class Dashboard extends Component
             ->get();
 
         $totalGasto = $pedidos->whereNotIn('status', ['cancelado'])->sum('total');
-        $pedidosEmAndamento = $pedidos->whereIn('status', ['aguardando_pagamento', 'pago', 'em_separacao', 'pronto_retirada', 'enviado'])->count();
+        $pedidosEmAndamento = $pedidos->whereIn('status', ['pendente', 'aguardando_pagamento', 'pago', 'em_separacao', 'pronto_retirada', 'enviado'])->count();
 
         return view('livewire.customer.dashboard', [
             'user' => $user,
